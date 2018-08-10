@@ -1,4 +1,4 @@
 export interface Collection {
     name: string;
-    books: any[];
+    books: Array<any>;
 }
