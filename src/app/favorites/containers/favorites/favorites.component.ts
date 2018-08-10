@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-import * as firebase from "firebase/app";
+import * as firebase from "firebase";
 import { FavoritesService } from "../../services/favorites.service";
 import { Observable } from 'rxjs';
 import { BookList } from '../../../books/models';

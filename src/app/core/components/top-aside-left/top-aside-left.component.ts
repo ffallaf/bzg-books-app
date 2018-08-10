@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from "firebase/app";
+import { User } from "firebase";
 
 @Component({
   selector: 'app-top-aside-left',

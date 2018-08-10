@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
 import { AuthGuardService } from "../auth/services/guards/auth-guard.service";
-import { BooksMainComponent } from "./containers/books-main/";
-import { BookDetailComponent } from "./containers/book-detail/";
+import { BooksMainComponent } from "./containers/books-main";
+import { BookDetailComponent } from "./containers/book-detail";
 
 export const routes: Routes = [
     {

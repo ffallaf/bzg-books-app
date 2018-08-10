@@ -6,11 +6,11 @@ import { AlertsModule } from "../alerts/alerts.module";
 import { AuthModule } from "../auth/auth.module";
 import { routes } from "./routes.core";
 import { CoreComponent } from './containers/core';
-import { AsideLeftComponent } from "./containers/aside-left/";
-import { MainContentComponent } from "./containers/main-content/";
-import { TopNavAppComponent } from "./containers/top-nav-app/";
-import { MenuAsideLeftComponent } from "./components/menu-aside-left/";
-import { TopAsideLeftComponent } from "./components/top-aside-left/";
+import { AsideLeftComponent } from "./containers/aside-left";
+import { MainContentComponent } from "./containers/main-content";
+import { TopNavAppComponent } from "./containers/top-nav-app";
+import { MenuAsideLeftComponent } from "./components/menu-aside-left";
+import { TopAsideLeftComponent } from "./components/top-aside-left";
 import { SearchFormComponent } from './components/search-form/search-form.component';
 
 @NgModule({
