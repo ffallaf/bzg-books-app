@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from "./routes.collections";
 import { CollectionsComponent } from "./containers/collections/collections.component";
-import { AddCollectionComponent } from './components/add-collection/add-collection.component';
+import { CreateCollectionComponent } from './components/create-collection/create-collection.component';
 
 @NgModule({
   imports: [
@@ -13,6 +13,6 @@ import { AddCollectionComponent } from './components/add-collection/add-collecti
     RouterModule.forChild(routes),
     ReactiveFormsModule
   ],
-  declarations: [CollectionsComponent, AddCollectionComponent]
+  declarations: [CollectionsComponent, CreateCollectionComponent]
 })
 export class CollectionsModule { }

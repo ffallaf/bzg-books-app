@@ -3,26 +3,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { CollectionsService } from '../../services/collections.service';
 
 @Component({
-  selector: 'app-add-collection',
-  templateUrl: './add-collection.component.html',
-  styleUrls: ['./add-collection.component.styl']
+  selector: 'app-create-collection',
+  templateUrl: './create-collection.component.html',
+  styleUrls: ['./create-collection.component.styl']
 })
-export class AddCollectionComponent implements OnInit {
+export class CreateCollectionComponent implements OnInit {
 
-  addCollectionForm: FormGroup;
+  createCollectionForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private collectionsService: CollectionsService) {
        
    }
 
   ngOnInit() {
-    this.addCollectionForm = this.formBuilder.group({
+    this.createCollectionForm = this.formBuilder.group({
       collectionName: ['', Validators.required]
     });
   }
 
   addCollection(): void {
-    let collectionName = this.addCollectionForm.get('collectionName').value;
+    let collectionName = this.createCollectionForm.get('collectionName').value;
     this.collectionsService.createCollection(collectionName);
   }
 

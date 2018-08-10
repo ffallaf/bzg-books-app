@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddCollectionComponent } from './add-collection.component';
+import { AddCollectionComponent } from './create-collection.component';
 
 describe('AddCollectionComponent', () => {
   let component: AddCollectionComponent;
