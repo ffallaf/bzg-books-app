@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { CollectionsService } from '../../services/collections.service';
+import { MessagesService } from '../../../alerts/services/messages.service';
 
 @Component({
   selector: 'app-create-collection',
@@ -11,7 +12,7 @@ export class CreateCollectionComponent implements OnInit {
 
   createCollectionForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private collectionsService: CollectionsService) {
+  constructor(private formBuilder: FormBuilder, private collectionsService: CollectionsService, private msgService: MessagesService) {
        
    }
 
@@ -23,7 +24,30 @@ export class CreateCollectionComponent implements OnInit {
 
   addCollection(): void {
     let collectionName = this.createCollectionForm.get('collectionName').value;
-    this.collectionsService.createCollection(collectionName);
+
+    if(!this.existsCollectionByName(collectionName)) {
+      this.collectionsService.createCollection(collectionName);
+    }
+    else {
+      this.log("Ya existe una colección con el nombre " + collectionName)
+    }
+  }
+
+  existsCollectionByName(collectionName: string): boolean {
+    let exists = false;
+    for(let collection of this.collectionsService.getCollections()) {
+      if(collection.name == collectionName) {
+        exists = true;
+        break;
+      }
+    }
+
+    return exists;
+  }
+
+  private log(message: string): void {
+    let type = "error";
+    this.msgService.message(message, type);
   }
 
 }
