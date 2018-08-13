@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Collection } from '../../models/collection';
 import { CollectionsService } from '../../services/collections.service';
 import{ Subscription, Observable } from 'rxjs';
@@ -13,16 +14,12 @@ export class ViewCollectionsComponent implements OnInit {
 
   collectionsList: Observable<any[]>;
   
-  constructor(private collectionsService: CollectionsService) {
+  constructor(private collectionsService: CollectionsService, private router: Router) {
     this.collectionsList = null;
    }
 
   ngOnInit() {
     this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
-  }
-
-  viewCollection(collection) {
-    console.log(collection);
   }
 
   private getCollectionListObservable(user: firebase.User): void {

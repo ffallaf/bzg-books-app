@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import * as firebase from "firebase";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MessagesService } from '../../../alerts/services/messages.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class BooksCollectionsService {
   collectionsItems: any[];
   user: firebase.User;
 
-  constructor(private authFire: AngularFireAuth, private afdb: AngularFireDatabase) {
+  constructor(private authFire: AngularFireAuth, private afdb: AngularFireDatabase, private messageService: MessagesService) {
     this.collectionsRef = null;
     this.authFire.authState.subscribe(user => {
       this.user = user;
@@ -46,6 +47,7 @@ export class BooksCollectionsService {
     }
     itemToUpdate.value.books.push(book);
     this.collectionsRef.update(itemToUpdate.key, itemToUpdate.value);
+    this.messageService.message('Libro añadido a colección ' + itemToUpdate.value.name,'success');
    }
 
    private getCollectionItem(collectionName: string): any {

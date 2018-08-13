@@ -7,7 +7,8 @@
           <span class="badge badge-primary">{{collection.books? collection.books.length: 0}}</span>
         </div>
         <div class="card-body">
-          <button class="btn btn-primary" [disabled]="!collection.books || (collection.books && collection.books.length == 0)">Ver Colección</button>
+          <button class="btn btn-primary" [disabled]="!collection.books || (collection.books && collection.books.length == 0)"
+          [routerLink]="['../collectiondetail', 1]">Ver Libros</button>
         </div>
       </div>
     </div>
