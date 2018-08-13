@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Collection } from '../models/collection';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import * as firebase from "firebase";
 import { MessagesService } from '../../alerts/services/messages.service';
-import { promise } from '../../../../node_modules/protractor';
 
 @Injectable({
   providedIn: 'root'
