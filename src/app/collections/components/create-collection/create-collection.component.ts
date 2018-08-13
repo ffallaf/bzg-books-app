@@ -22,7 +22,7 @@ export class CreateCollectionComponent implements OnInit {
     });
   }
 
-  addCollection(): void {
+  createCollection(): void {
     let collectionName = this.createCollectionForm.get('collectionName').value;
 
     if(!this.existsCollectionByName(collectionName)) {
@@ -35,12 +35,13 @@ export class CreateCollectionComponent implements OnInit {
 
   existsCollectionByName(collectionName: string): boolean {
     let exists = false;
-    for(let collection of this.collectionsService.getCollections()) {
-      if(collection.name == collectionName) {
-        exists = true;
-        break;
+    /*this.collectionsService.collectionsList.forEach(collections => {
+      for(let collection of collections) {
+        if(collectionName == collection.name) {
+          exists = true;
+        }
       }
-    }
+    });*/
 
     return exists;
   }

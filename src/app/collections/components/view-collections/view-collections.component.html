@@ -1,10 +1,10 @@
 <div class="container content">
   <div class="row">
-    <div *ngFor="let collection of collections" class="col-12 col-sm-12 col-md-6 col-lg-3">
+    <div *ngFor="let collection of collectionsList | async" class="col-12 col-sm-12 col-md-6 col-lg-3">
       <div class="card">
         <div class="card-header">
           <span>{{collection.name}} </span>
-          <span class="badge badge-primary">{{collection.books.length}}</span>
+          <span class="badge badge-primary">0</span>
         </div>
         <div class="card-body">
           <a href="#" class="btn btn-primary">Ver Colección</a>

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collection } from '../../models/collection';
 import { CollectionsService } from '../../services/collections.service';
-import{ Subscription } from 'rxjs';
+import{ Subscription, Observable } from 'rxjs';
+import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase } from "angularfire2/database";
 
 @Component({
   selector: 'app-view-collections',
@@ -10,19 +12,16 @@ import{ Subscription } from 'rxjs';
 })
 export class ViewCollectionsComponent implements OnInit {
 
-  collections: Array<Collection>;
-  collectionsSubscription: Subscription;
-
-  constructor(private collectionsService: CollectionsService) {
-    this.collectionsSubscription = this.collectionsService.getCollectionsObservable().subscribe(collections => this.fillCollections(collections))
+  collectionsList: Observable<any>;
+  
+  constructor(private authFire: AngularFireAuth, private rdb: AngularFireDatabase) {
+    this.collectionsList = null;
    }
 
   ngOnInit() {
-    this.collections = this.collectionsService.getCollections();
-  }
-
-  fillCollections(collectionsSource: Array<Collection>): void {
-    this.collections = collectionsSource;
+    this.authFire.authState.subscribe(user => {
+      this.collectionsList = this.rdb.list('collections/' + user.uid).valueChanges();
+    });
   }
 
 }
