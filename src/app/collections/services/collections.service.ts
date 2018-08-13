@@ -24,7 +24,7 @@ export class CollectionsService {
 
    createCollection(collectionName: string): void {
     let newCollection = { name: collectionName, books: []};
-    this.collectionsRef = this.rdb.list('collections/' + this.user.uid + '/' + collectionName);
+    this.collectionsRef = this.rdb.list('collections/' + this.user.uid);
     const createPromise = this.collectionsRef.push(newCollection);
     createPromise.then(_ => this.messageService.message("Colección creada", "success"));
 

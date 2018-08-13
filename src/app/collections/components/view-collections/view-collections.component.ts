@@ -11,7 +11,7 @@ import * as firebase from "firebase";
 })
 export class ViewCollectionsComponent implements OnInit {
 
-  collectionsList: Observable<any>;
+  collectionsList: Observable<any[]>;
   
   constructor(private collectionsService: CollectionsService) {
     this.collectionsList = null;
@@ -19,6 +19,10 @@ export class ViewCollectionsComponent implements OnInit {
 
   ngOnInit() {
     this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
+  }
+
+  viewCollection(collection) {
+    console.log(collection);
   }
 
   private getCollectionListObservable(user: firebase.User): void {
