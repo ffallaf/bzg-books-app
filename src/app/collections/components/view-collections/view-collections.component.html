@@ -4,10 +4,10 @@
       <div class="card">
         <div class="card-header">
           <span>{{collection.name}} </span>
-          <span class="badge badge-primary">0</span>
+          <span class="badge badge-primary">{{collection.books? collection.books.length: 0}}</span>
         </div>
         <div class="card-body">
-          <a href="#" class="btn btn-primary">Ver Colección</a>
+          <button class="btn btn-primary" [disabled]="!collection.books || (collection.books && collection.books.length == 0)">Ver Colección</button>
         </div>
       </div>
     </div>
