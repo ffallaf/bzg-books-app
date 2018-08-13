@@ -9,7 +9,7 @@ import { Observable } from '../../../../../../node_modules/rxjs';
 })
 export class BookCollectionDropdownComponent implements OnInit {
 
-  collectionListObservable: Observable<any>;
+  collectionList: Array<any>;
 
   constructor(private collectionsService: BooksCollectionsService) {
     this.collectionsService.getUserObservable().subscribe(user => { this.getCollectionListObservable(user) });
@@ -19,7 +19,11 @@ export class BookCollectionDropdownComponent implements OnInit {
   }
 
   private getCollectionListObservable(user: firebase.User): void {
-    this.collectionListObservable = this.collectionsService.getBooksCollectionsListObservable(user);
+    this.collectionsService.getBooksCollectionsListObservable(user).subscribe(collections => { this.fillCollectionsList(collections) });
+  }
+
+  private fillCollectionsList(collections: Array<any>): void {
+    this.collectionList = collections;
   }
 
 }

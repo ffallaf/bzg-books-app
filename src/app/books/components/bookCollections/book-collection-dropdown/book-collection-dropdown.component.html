@@ -3,7 +3,7 @@
       <i class="fa fa-plus"></i> Agregar a
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <div *ngFor="let collection of collectionListObservable | async">
+    <div *ngFor="let collection of collectionList">
       <button class="dropdown-item" type="button">{{collection.name}}</button>
     </div>
   </div>
