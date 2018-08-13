@@ -5,6 +5,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import * as firebase from "firebase";
 import { MessagesService } from '../../alerts/services/messages.service';
+import { promise } from '../../../../node_modules/protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class CollectionsService {
     this.authFire.authState.subscribe(
       user => {
         this.user = user,
-        this.collectionsRef = rdb.list('collections/' + this.user.uid);
+        this.collectionsRef = this.rdb.list('collections/' + this.user.uid);
       }
     );
    }
@@ -28,5 +29,13 @@ export class CollectionsService {
     const createPromise = this.collectionsRef.push(newCollection);
     createPromise.then(_ => this.messageService.message("Colección creada", "success"));
 
+   }
+
+   getUserAuthObservable(): Observable<firebase.User> {
+    return this.authFire.authState; 
+   }
+
+   getCollectionsListObservable(user: firebase.User): Observable<any> {
+     return this.rdb.list('collections/' +  user.uid).valueChanges();
    }
 }

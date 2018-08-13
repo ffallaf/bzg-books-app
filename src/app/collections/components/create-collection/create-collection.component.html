@@ -3,5 +3,6 @@
       <label for="collectionNameControl" class="sr-only">Nombre Colección</label>
       <input type="text" formControlName="collectionName" id="collectionNameControl" class="form-control" placeholder="Nombre Colección" />
   </div>
-  <button type="submit" class="btn btn-primary mb-2" (click)="createCollection()" [disabled]="!createCollectionForm.valid">Crear Colección</button>
+  <button type="submit" class="btn btn-primary mb-2" (click)="createCollection()" 
+    [disabled]="!createCollectionForm.valid">Crear Colección</button>
 </form>

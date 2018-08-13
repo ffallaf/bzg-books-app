@@ -2,8 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Collection } from '../../models/collection';
 import { CollectionsService } from '../../services/collections.service';
 import{ Subscription, Observable } from 'rxjs';
-import { AngularFireAuth } from "angularfire2/auth";
-import { AngularFireDatabase } from "angularfire2/database";
+import * as firebase from "firebase";
 
 @Component({
   selector: 'app-view-collections',
@@ -14,14 +13,16 @@ export class ViewCollectionsComponent implements OnInit {
 
   collectionsList: Observable<any>;
   
-  constructor(private authFire: AngularFireAuth, private rdb: AngularFireDatabase) {
+  constructor(private collectionsService: CollectionsService) {
     this.collectionsList = null;
    }
 
   ngOnInit() {
-    this.authFire.authState.subscribe(user => {
-      this.collectionsList = this.rdb.list('collections/' + user.uid).valueChanges();
-    });
+    this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
+  }
+
+  private getCollectionListObservable(user: firebase.User): void {
+    this.collectionsList = this.collectionsService.getCollectionsListObservable(user);
   }
 
 }
