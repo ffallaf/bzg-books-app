@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BooksCollectionsService } from '../../../services/collections/books-collections.service';
 import { Observable } from '../../../../../../node_modules/rxjs';
 
@@ -10,12 +10,17 @@ import { Observable } from '../../../../../../node_modules/rxjs';
 export class BookCollectionDropdownComponent implements OnInit {
 
   collectionList: Array<any>;
+  @Input() book:any;
 
   constructor(private collectionsService: BooksCollectionsService) {
     this.collectionsService.getUserObservable().subscribe(user => { this.getCollectionListObservable(user) });
    }
 
   ngOnInit() {
+  }
+
+  addBookToCollection(collectionName: string) {
+    this.collectionsService.addBookToCollection(this.book, collectionName);
   }
 
   private getCollectionListObservable(user: firebase.User): void {
