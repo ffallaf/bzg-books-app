@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { Collection } from '../../models/collection';
 import { CollectionsService } from '../../services/collections.service';
 import{ Subscription, Observable } from 'rxjs';
@@ -14,7 +13,7 @@ export class ViewCollectionsComponent implements OnInit {
 
   collectionItems: any[];
   
-  constructor(private collectionsService: CollectionsService, private router: Router) {
+  constructor(private collectionsService: CollectionsService) {
    }
 
   ngOnInit() {

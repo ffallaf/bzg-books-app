@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
+import { CollectionsService } from '../../services/collections.service';
+import { CollectionsModule } from 'src/app/collections/collections.module';
 
 @Component({
   selector: 'app-view-collection-detail',
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewCollectionDetailComponent implements OnInit {
 
-  constructor() { }
+  collectionId: string;
+  collectionName: string;
+  collectionList: any[];
+
+  constructor(private activatedRoute: ActivatedRoute, private collectionsService: CollectionsService) {
+    this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
+   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.collectionId = params.id;
+    });
+  }
+
+  viewBook(book) {
+    console.log(book);
+  }
+
+  private getCollectionListObservable(user: firebase.User): void {
+    this.collectionsService.getCollectionBooksObservable(user, this.collectionId).subscribe(collections => { this.fillBookCollectionsList(collections) } );
+  }
+
+  private fillBookCollectionsList(collections: any[]) {
+    this.collectionList = collections[0].value;
+    this.collectionName = collections[1].value;
   }
 
 }

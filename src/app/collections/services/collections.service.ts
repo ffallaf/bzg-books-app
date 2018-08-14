@@ -33,6 +33,15 @@ export class CollectionsService {
     );
    }
 
+   getCollectionBooksObservable(user: firebase.User, collectionId: string): Observable<any> {
+    return this.afdb.list('collections/' + this.user.uid + '/' + collectionId).snapshotChanges().pipe(
+      map(items => items.map(i => ({
+        key: i.payload.key,
+        value: i.payload.val()
+      })))
+    );
+  }
+
    createCollection(collectionName: string): void {
     let newCollection = { name: collectionName, books: []};
     this.collectionsRef = this.afdb.list('collections/' + this.user.uid);
