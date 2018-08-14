@@ -12,10 +12,9 @@ import * as firebase from "firebase";
 })
 export class ViewCollectionsComponent implements OnInit {
 
-  collectionsList: Observable<any[]>;
+  collectionItems: any[];
   
   constructor(private collectionsService: CollectionsService, private router: Router) {
-    this.collectionsList = null;
    }
 
   ngOnInit() {
@@ -23,7 +22,9 @@ export class ViewCollectionsComponent implements OnInit {
   }
 
   private getCollectionListObservable(user: firebase.User): void {
-    this.collectionsList = this.collectionsService.getCollectionsListObservable(user);
+    this.collectionsService.getCollectionItemsObservable().subscribe(collections => {
+      this.collectionItems = collections;
+    });
   }
 
 }

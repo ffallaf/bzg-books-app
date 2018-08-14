@@ -1,14 +1,14 @@
 <div class="container content">
   <div class="row">
-    <div *ngFor="let collection of collectionsList | async" class="col-12 col-sm-12 col-md-6 col-lg-3">
+    <div *ngFor="let collection of collectionItems" class="col-12 col-sm-12 col-md-6 col-lg-3">
       <div class="card">
         <div class="card-header">
-          <span>{{collection.name}} </span>
-          <span class="badge badge-primary">{{collection.books? collection.books.length: 0}}</span>
+          <span>{{collection.value.name}} </span>
+          <span class="badge badge-primary">{{collection.value.books? collection.value.books.length: 0}}</span>
         </div>
         <div class="card-body">
-          <button class="btn btn-primary" [disabled]="!collection.books || (collection.books && collection.books.length == 0)"
-          [routerLink]="['../collectiondetail', 1]">Ver Libros</button>
+          <button class="btn btn-primary" [disabled]="!collection.value.books || (collection.value.books && collection.value.books.length == 0)"
+          [routerLink]="['../collectiondetail', collection.key]">Ver Libros</button>
         </div>
       </div>
     </div>
