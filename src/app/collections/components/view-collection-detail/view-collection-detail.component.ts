@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from "@angular/router";
 import { CollectionsService } from '../../services/collections.service';
-import { CollectionsModule } from 'src/app/collections/collections.module';
 
 @Component({
   selector: 'app-view-collection-detail',
@@ -15,13 +14,15 @@ export class ViewCollectionDetailComponent implements OnInit {
   collectionList: any[];
 
   constructor(private activatedRoute: ActivatedRoute, private collectionsService: CollectionsService) {
-    this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
+    this.collectionName = "";
    }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.collectionId = params.id;
     });
+
+    this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
   }
 
   viewBook(book) {

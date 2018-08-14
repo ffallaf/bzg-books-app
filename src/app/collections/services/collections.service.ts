@@ -33,7 +33,7 @@ export class CollectionsService {
     );
    }
 
-   getCollectionBooksObservable(user: firebase.User, collectionId: string): Observable<any> {
+   getCollectionBooksObservable(user: firebase.User, collectionId: string): Observable<any[]> {
     return this.afdb.list('collections/' + this.user.uid + '/' + collectionId).snapshotChanges().pipe(
       map(items => items.map(i => ({
         key: i.payload.key,
