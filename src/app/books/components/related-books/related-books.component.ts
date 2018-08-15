@@ -10,7 +10,7 @@ import { BookList } from '../../models';
 })
 export class RelatedBooksComponent implements OnInit {
 
-  @Input() book: any;
+  book: any;
   booksList: BookList;
 
   constructor(private booksService: BooksListService, private activatedRoute: ActivatedRoute) {
