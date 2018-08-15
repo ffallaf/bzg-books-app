@@ -55,9 +55,13 @@ export class ViewCollectionDetailComponent implements OnInit {
   }
 
   private fillBookCollectionsList(collections: any[]) {
-    if(collections[0].value)
+    if(collections.length == 2) {
       this.collectionList = collections[0].value;
-    this.collectionName = collections[1].value;
+      this.collectionName = collections[1].value;
+    }
+    else
+      this.collectionName = collections[0].value;
+      
   }
 
 }
