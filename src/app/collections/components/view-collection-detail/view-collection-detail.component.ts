@@ -37,6 +37,7 @@ export class ViewCollectionDetailComponent implements OnInit {
 
     if(bookIndexToRemove > -1) {
       this.collectionList.splice(bookIndexToRemove, 1);
+
       let collectionObject = {
         name: this.collectionName,
         books: this.collectionList
@@ -54,7 +55,8 @@ export class ViewCollectionDetailComponent implements OnInit {
   }
 
   private fillBookCollectionsList(collections: any[]) {
-    this.collectionList = collections[0].value;
+    if(collections[0].value)
+      this.collectionList = collections[0].value;
     this.collectionName = collections[1].value;
   }
 
