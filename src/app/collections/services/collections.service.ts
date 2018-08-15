@@ -50,6 +50,11 @@ export class CollectionsService {
 
    }
 
+   updateCollection(collectionId: string, collection: any) {
+    let collectionsRef = this.afdb.list('collections/' + this.user.uid);
+    collectionsRef.update(collectionId, collection);
+   }
+
    getUserAuthObservable(): Observable<firebase.User> {
     return this.authFire.authState; 
    }

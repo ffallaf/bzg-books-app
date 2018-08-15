@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, forwardRef } from '@angular/core';
 import { ActivatedRoute, Params } from "@angular/router";
 import { CollectionsService } from '../../services/collections.service';
 
@@ -23,6 +23,26 @@ export class ViewCollectionDetailComponent implements OnInit {
     });
 
     this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
+  }
+
+  removeFromCollection(bookId: string): void {
+    let bookIndexToRemove: number = -1;
+
+    for(let i = 0; i < this.collectionList.length; i++) {
+      if(this.collectionList[i].id === bookId) {
+        bookIndexToRemove = i;
+        break;
+      }
+    }
+
+    if(bookIndexToRemove > -1) {
+      this.collectionList.splice(bookIndexToRemove, 1);
+      let collectionObject = {
+        name: this.collectionName,
+        books: this.collectionList
+      };
+      this.collectionsService.updateCollection(this.collectionId, collectionObject);
+    }
   }
 
   viewBook(book) {

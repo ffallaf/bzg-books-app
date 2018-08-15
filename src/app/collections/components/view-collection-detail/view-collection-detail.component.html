@@ -19,6 +19,7 @@
           <p class="card-text">
             {{book.volumeInfo.publishedDate}}
           </p>
+          <button type="button" class="btn btn-danger" (click)="removeFromCollection(book.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
       </div>
     </div>
