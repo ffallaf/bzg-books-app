@@ -23,6 +23,23 @@ export class BookCollectionDropdownComponent implements OnInit {
     this.collectionsService.addBookToCollection(this.book, collectionName);
   }
 
+  isBookInCollection(collectionName: string): boolean {
+    let isInCollection: boolean = false;
+
+    if(this.collectionList && this.book) {
+      for(let collection of this.collectionList) {
+        for(let colBook of collection.books) {
+          if(colBook.id == this.book.id && collection.name == collectionName) {
+            isInCollection= true;
+            break;
+          }
+        }
+      }
+    }
+
+    return isInCollection;
+  }
+
   private getCollectionListObservable(user: firebase.User): void {
     this.collectionsService.getBooksCollectionsListObservable(user).subscribe(collections => { this.fillCollectionsList(collections) });
   }

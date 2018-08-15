@@ -4,7 +4,7 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <div *ngFor="let collection of collectionList">
-      <button class="dropdown-item" type="button" (click)="addBookToCollection(collection.name)">{{collection.name}}</button>
+      <button *ngIf="!isBookInCollection(collection.name)" class="dropdown-item" type="button" (click)="addBookToCollection(collection.name)">{{collection.name}}</button>
     </div>
   </div>
 </div>
