@@ -28,12 +28,17 @@ export class BookCollectionDropdownComponent implements OnInit {
 
     if(this.collectionList && this.book) {
       for(let collection of this.collectionList) {
-        for(let colBook of collection.books) {
-          if(colBook.id == this.book.id && collection.name == collectionName) {
-            isInCollection= true;
-            break;
+        if(collection.books) {
+          for(let colBook of collection.books) {
+            if(colBook.id == this.book.id && collection.name == collectionName) {
+              isInCollection= true;
+              break;
+            }
           }
         }
+
+        if(isInCollection)
+        break;
       }
     }
 
