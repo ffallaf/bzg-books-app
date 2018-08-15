@@ -9,6 +9,7 @@
         <div class="card-body">
           <button class="btn btn-primary" [disabled]="!collection.value.books || (collection.value.books && collection.value.books.length == 0)"
           [routerLink]="['../collectiondetail', collection.key]">Ver Libros</button>
+          &nbsp;<button type="button" class="btn btn-danger" (click)="deleteCollection(collection.value.name)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
       </div>
     </div>

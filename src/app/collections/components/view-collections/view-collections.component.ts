@@ -20,6 +20,10 @@ export class ViewCollectionsComponent implements OnInit {
     this.collectionsService.getUserAuthObservable().subscribe(user => { this.getCollectionListObservable(user)});
   }
 
+  deleteCollection(collectionName: string) {
+    this.collectionsService.deleteCollection(collectionName);
+  }
+
   private getCollectionListObservable(user: firebase.User): void {
     this.collectionsService.getCollectionItemsObservable().subscribe(collections => {
       this.collectionItems = collections;

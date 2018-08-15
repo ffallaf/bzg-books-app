@@ -15,6 +15,7 @@ export class CollectionsService {
   collectionsRef: AngularFireList<any>;
   collectionsItemsObservable: Observable<any[]>;
   user: firebase.User;
+  collectionsItems: any[];
   
   constructor(private authFire: AngularFireAuth, private afdb: AngularFireDatabase, private messageService: MessagesService) {
     this.authFire.authState.subscribe(
@@ -53,6 +54,26 @@ export class CollectionsService {
    updateCollection(collectionId: string, collection: any) {
     let collectionsRef = this.afdb.list('collections/' + this.user.uid);
     collectionsRef.update(collectionId, collection);
+   }
+
+   deleteCollection(collectionName: string) {
+    let collectionsRef = this.afdb.list('collections/' + this.user.uid);
+    
+    this.afdb.list('collections/' + this.user.uid).snapshotChanges().pipe(
+      map(items => items.map(i => ({
+        key: i.payload.key,
+        collectionName: i.payload.val()["name"]
+      })))
+    ).subscribe(collections => {
+      for(let collectionItem of collections) {
+        if(collectionItem.collectionName == collectionName) {
+          let key = collectionItem.key;
+          collectionsRef.remove(key);
+          break;
+        }
+      }      
+    });
+
    }
 
    getUserAuthObservable(): Observable<firebase.User> {
