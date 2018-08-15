@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Collection } from '../../models/collection';
 import { CollectionsService } from '../../services/collections.service';
-import{ Subscription, Observable } from 'rxjs';
 import * as firebase from "firebase";
 
 @Component({
