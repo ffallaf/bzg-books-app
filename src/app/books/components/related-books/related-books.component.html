@@ -1,16 +1,17 @@
 <span class="display-4">Related Books</span>
 <hr>
 <div class="row">
-  <div class="col-3" *ngFor="let book of booksList?.items">
-    <div class="card">
-      <div class="card-header">
-          {{book.volumeInfo.title}}
-      </div>
-      <div class="card-body">
-        <img class="card-img-top" [src]="book.volumeInfo.imageLinks?.smallThumbnail">
-        <p class="card-text">{{book.volumeInfo.publisher}} - {{book.volumeInfo.publishedDate}}</p>
+    <div class="col-3" *ngFor="let book of booksList?.items">
+      <div class="card">
+        <div class="card-header">
+            {{book.volumeInfo.title}}
+        </div>
+        <div class="card-body">
+          <img class="card-img-top" [src]="book.volumeInfo.imageLinks?.smallThumbnail">
+          <p class="card-text">{{book.volumeInfo?.publisher}} - {{book.volumeInfo?.publishedDate}}</p>
+          <a class="col-12 btn btn-primary" [routerLink]="['../../detail', book.id]">Ver Detalle</a>
+        </div>
       </div>
     </div>
+    <br>
   </div>
-  <br>
-</div>

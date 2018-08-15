@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Params } from "@angular/router";
 import { BooksListService } from "../../services/list/books-list.service";
 import { BookList } from '../../models';
 
@@ -9,18 +10,41 @@ import { BookList } from '../../models';
 })
 export class RelatedBooksComponent implements OnInit {
 
-  @Input() searchParam: string;
+  @Input() book: any;
   booksList: BookList;
 
-  constructor(private booksService: BooksListService) {
+  constructor(private booksService: BooksListService, private activatedRoute: ActivatedRoute) {
+    this.book = {};
    }
 
-  ngOnInit() {
-    this.booksService.searchBooks(this.searchParam);
-    this.booksService.booksList.subscribe(books => { 
-      if(books)
-        this.booksList = books
+  ngOnInit() {    
+    let id: string;
+    this.activatedRoute.params.subscribe((params: Params) => {
+      id = params.id;
+      this.booksService.getBook(id)
+        .subscribe(
+          books => {
+            if (books) {
+              this.book = books;
+              this.searchRelatedBooks(this.book);
+            }
+          }
+        );
     });
+  }
+
+  private searchRelatedBooks(book: any) {
+    let searchParam = "Colombia";
+    if(book)
+      searchParam = book.volumeInfo.publisher;
+
+    if(searchParam) {
+      this.booksService.searchBooks(searchParam);
+      this.booksService.booksList.subscribe(books => { 
+        if(books)
+          this.booksList = books
+      });
+    }
   }
 
 }
